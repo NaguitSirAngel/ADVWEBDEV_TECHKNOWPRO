@@ -58,6 +58,14 @@
                                     <asp:TextBox ID="txtCustomerId" runat="server" Width="155px" ReadOnly="True"></asp:TextBox>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="auto-style9">
+                                    <asp:Label ID="Label7" runat="server" Text="Product Name:"></asp:Label>
+                                </td>
+                                <td class="auto-style4">
+                                    <asp:TextBox ID="txtProductName" runat="server" Width="155px"></asp:TextBox>
+                                </td>
+                            </tr>
                         </table>
                     </td>
                     <td>
@@ -120,9 +128,9 @@
                 ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
                 SelectCommand="SELECT [customer_id], [user_id], ([lastname]+',  ' + [firstname]) as customer_name FROM [customers]" 
                 InsertCommand="INSERT INTO [incidents] 
-                                        (incident_number, customer_id, datetime, status, description, method_of_contact)
+                                        (incident_number, customer_id, datetime, status, description, method_of_contact, product_name)
                                     VALUES
-                                        (@incident_number, @customer_id, @datetime, @status, @description, @method_of_contact)">
+                                        (@incident_number, @customer_id, @datetime, @status, @description, @method_of_contact, @product_name)">
                 <InsertParameters>
                     <asp:FormParameter Name="incident_number" FormField="txtIncidentNum" Type="Int32"/>
                     <asp:FormParameter Name="customer_id" formfield="txtCustomerId" Type="Int32"/>
@@ -131,6 +139,7 @@
                     <asp:FormParameter Name="status" FormField="ddlStatus" Type="String"/>
                     <asp:FormParameter Name="description" FormField="txtDescription" Type="String"/>
                     <asp:FormParameter Name="method_of_contact" FormField="rblContactMethod" Type="String"/>
+                    <asp:FormParameter Name="product_name" FormField="txtProductName" Type="String"/>
                 </InsertParameters>
                 
 
