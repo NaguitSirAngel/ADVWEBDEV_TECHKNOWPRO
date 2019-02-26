@@ -44,14 +44,14 @@ namespace TechKnowPro
             //create a new customer object and load with data from row
             Customer c = new Customer();
             c.customer_id = row["customer_id"].ToString();
-            c.user_id = row["user_id"].ToString();
+            //c.user_id = row["user_id"].ToString();
             return c;
         }
 
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
 
-            SqlDataSource1.InsertParameters["user_id"].DefaultValue = selectedCustomer.user_id;
+            //SqlDataSource1.InsertParameters["user_id"].DefaultValue = selectedCustomer.user_id;
             SqlDataSource1.InsertParameters["datetime"].DefaultValue = DateTime.Now.ToString();
             SqlDataSource1.Insert();
             clear();

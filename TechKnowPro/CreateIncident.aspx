@@ -120,9 +120,9 @@
                 ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
                 SelectCommand="SELECT [customer_id], [user_id], ([lastname]+',  ' + [firstname]) as customer_name FROM [customers]" 
                 InsertCommand="INSERT INTO [incidents] 
-                                        (incident_number, customer_id, user_id, datetime, status, description, method_of_contact)
+                                        (incident_number, customer_id, datetime, status, description, method_of_contact)
                                     VALUES
-                                        (@incident_number, @customer_id, @user_id, @datetime, @status, @description, @method_of_contact)">
+                                        (@incident_number, @customer_id, @datetime, @status, @description, @method_of_contact)">
                 <InsertParameters>
                     <asp:FormParameter Name="incident_number" FormField="txtIncidentNum" Type="Int32"/>
                     <asp:FormParameter Name="customer_id" formfield="txtCustomerId" Type="Int32"/>
