@@ -72,6 +72,7 @@
       <DependentUpon>techknowdb.mdf</DependentUpon>
     </Content>
     <Content Include="Contactlist.aspx" />
+    <Content Include="CreateIncident.aspx" />
     <Content Include="Customers.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -83,6 +84,13 @@
     <Compile Include="Contactlist.aspx.designer.cs">
       <DependentUpon>Contactlist.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateIncident.aspx.cs">
+      <DependentUpon>CreateIncident.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateIncident.aspx.designer.cs">
+      <DependentUpon>CreateIncident.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Customers.aspx.cs">
       <DependentUpon>Customers.aspx</DependentUpon>
@@ -91,6 +99,7 @@
     <Compile Include="Customers.aspx.designer.cs">
       <DependentUpon>Customers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Incident.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
