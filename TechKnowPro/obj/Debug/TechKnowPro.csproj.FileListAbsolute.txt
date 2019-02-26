@@ -110,3 +110,13 @@ C:\Users\SPYreborn2005\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\ro
 C:\Users\SPYreborn2005\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\SPYreborn2005\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\SPYreborn2005\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\obj\Debug\TechKnowPro.csproj.CopyComplete
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\TechKnowPro.dll.config
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\TechKnowPro.dll
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\TechKnowPro.pdb
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\obj\Debug\TechKnowPro.csprojAssemblyReference.cache
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\obj\Debug\TechKnowPro.csproj.CoreCompileInputs.cache
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\obj\Debug\TechKnowPro.csproj.CopyComplete
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\obj\Debug\TechKnowPro.dll
+C:\Users\ajaci\Documents\GitHub\ADVWEBDEV_TECHKNOWPRO\TechKnowPro\obj\Debug\TechKnowPro.pdb

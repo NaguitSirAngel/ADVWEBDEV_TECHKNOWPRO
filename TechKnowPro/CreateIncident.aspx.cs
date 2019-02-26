@@ -61,12 +61,14 @@ namespace TechKnowPro
 
         private void clear()
         {
+            txtCustomerId.Text = "1";
+            txtIncidentNum.Text = rand.Next(10000).ToString();
             txtDescription.Text = string.Empty;
+            txtProductName.Text = string.Empty;
             ddlCustomers.SelectedIndex = 0;
             ddlStatus.SelectedIndex = 0;
             rblContactMethod.SelectedIndex = -1;
-            txtCustomerId.Text = "1";
-            txtIncidentNum.Text = rand.Next(10000).ToString();
+
         }
   
     }
