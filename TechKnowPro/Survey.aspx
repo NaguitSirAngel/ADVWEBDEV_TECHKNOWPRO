@@ -42,12 +42,11 @@
                 <td class="auto-style2">
                     Incidents:</td>
                 <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" Height="35px" Width="515px" DataSourceID="SqlDataSource1" DataTextField="quer" DataValueField="incident_id">
+                    <asp:DropDownList ID="DropDownList1" runat="server" Height="35px" Width="515px" DataSourceID="SqlDataSource1" DataTextField="quer" DataValueField="incident_number">
                     </asp:DropDownList>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [incident_id], 'Incident for Product ' + [product_name] + ', ' + [status] + ', ' + CONVERT(varchar(20),[datetime],101) + ' - ' +  [description] as quer FROM [incidents] WHERE (([user_id] IS NULL) AND ([customer_id] IS NULL) AND ([status] LIKE '%' + @status + '%'))">
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT 'Incident for Product ' + [product_name] + ', ' + [status] + ', ' + CONVERT(varchar(20),[datetime],101) + ' - ' +  [description] as quer , [incident_id], [customer_id], [method_of_contact], [incident_number], [is_answered] FROM [incidents] WHERE (([customer_id] = @customer_id) AND ([is_answered] IS NULL))">
                         <SelectParameters>
-                            <asp:Parameter DefaultValue="closed" Name="status" Type="String" />                  
-
+                            <asp:SessionParameter Name="customer_id" SessionField="customerId" Type="Int32" />
                         </SelectParameters>
                     </asp:SqlDataSource>
                 </td>
@@ -142,12 +141,12 @@
             <tr>
                 <td class="auto-style2">
                     <asp:Button ID="btnSubmit" runat="server" Text="Submit"  OnClick="btnSubmit_Click" />
-                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [surveys] WHERE [survey_id] = @survey_id" InsertCommand="INSERT INTO [surveys] ([incident_id], [response_time], [technician_efficiency], [problem_efficiency], [contact_to_discuss], [preferred_contact], [additional_comment], [datetime]) VALUES (@incident_id, @response_time, @technician_efficiency, @problem_efficiency, @contact_to_discuss, @preferred_contact, @additional_comment, @datetime)" SelectCommand="SELECT * FROM [surveys]" UpdateCommand="UPDATE [surveys] SET [incident_id] = @incident_id, [response_time] = @response_time, [technician_efficiency] = @technician_efficiency, [problem_efficiency] = @problem_efficiency, [contact_to_discuss] = @contact_to_discuss, [preferred_contact] = @preferred_contact, [additional_comment] = @additional_comment, [datetime] = @datetime WHERE [survey_id] = @survey_id">
+                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [surveys] WHERE [survey_id] = @survey_id" InsertCommand="INSERT INTO [surveys] ([response_time], [technician_efficiency], [problem_efficiency], [contact_to_discuss], [preferred_contact], [additional_comment], [datetime], [customer_id], [incident_number]) VALUES (@response_time, @technician_efficiency, @problem_efficiency, @contact_to_discuss, @preferred_contact, @additional_comment, @datetime, @customer_id, @incident_number)" SelectCommand="SELECT * FROM [surveys]" UpdateCommand="UPDATE [surveys] SET [incident_id] = @incident_id, [response_time] = @response_time, [technician_efficiency] = @technician_efficiency, [problem_efficiency] = @problem_efficiency, [contact_to_discuss] = @contact_to_discuss, [preferred_contact] = @preferred_contact, [additional_comment] = @additional_comment, [datetime] = @datetime WHERE [survey_id] = @survey_id">
                         <DeleteParameters>
                             <asp:Parameter Name="survey_id" Type="Int32" />
                         </DeleteParameters>
                         <InsertParameters>
-                            <asp:ControlParameter Name="incident_id" Type="Int32" ControlID="DropDownList1"   />
+                            <asp:ControlParameter Name="incident_number" Type="Int32" ControlID="DropDownList1"   />
                             <asp:ControlParameter Name="response_time" Type="String" ControlID="RadioButtonList1" />
                             <asp:ControlParameter Name="technician_efficiency" Type="String" ControlID="RadioButtonList2" />
                             <asp:ControlParameter Name="problem_efficiency" Type="String" ControlID="RadioButtonList3" />
@@ -155,6 +154,8 @@
                             <asp:ControlParameter Name="preferred_contact" Type="String" ControlID="RadioButtonList4" />
                             <asp:ControlParameter Name="additional_comment" Type="String" ControlID="txtComments" />
                             <asp:Parameter Name="datetime" Type="DateTime" />
+                            <asp:SessionParameter Name="customer_id" Type="Int32" SessionField="customerId" />
+
                         </InsertParameters>
                         <UpdateParameters>
                             <asp:Parameter Name="incident_id" Type="Int32" />
@@ -168,28 +169,33 @@
                             <asp:Parameter Name="survey_id" Type="Int32" />
                         </UpdateParameters>
                     </asp:SqlDataSource>
-                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [incidents] WHERE [incident_id] = @incident_id" InsertCommand="INSERT INTO [incidents] ([customer_id], [user_id], [datetime], [status], [description], [method_of_contact], [product_name]) VALUES (@customer_id, @user_id, @datetime, @status, @description, @method_of_contact, @product_name)" SelectCommand="SELECT * FROM [incidents] WHERE ([user_id] IS NULL)" UpdateCommand="UPDATE [incidents] SET [customer_id] = @customer_id, [user_id] = @user_id WHERE [incident_id] = @incident_id">
+                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" DeleteCommand="DELETE FROM [incidents] WHERE [incident_id] = @incident_id" InsertCommand="INSERT INTO [incidents] ([customer_id], [datetime], [status], [description], [method_of_contact], [product_name], [incident_number], [is_answered]) VALUES (@customer_id, @datetime, @status, @description, @method_of_contact, @product_name, @incident_number, @is_answered)" SelectCommand="SELECT * FROM [incidents] WHERE ([incident_id] = @incident_id)" UpdateCommand="UPDATE [incidents] SET [is_answered] = @is_answered WHERE [incident_number] = @incident_number">
                         <DeleteParameters>
                             <asp:Parameter Name="incident_id" Type="Int32" />
                         </DeleteParameters>
                         <InsertParameters>
                             <asp:Parameter Name="customer_id" Type="Int32" />
-                            <asp:Parameter Name="user_id" Type="Int32" />
                             <asp:Parameter Name="datetime" Type="DateTime" />
                             <asp:Parameter Name="status" Type="String" />
                             <asp:Parameter Name="description" Type="String" />
                             <asp:Parameter Name="method_of_contact" Type="String" />
                             <asp:Parameter Name="product_name" Type="String" />
+                            <asp:Parameter Name="incident_number" Type="Int32" />
+                            <asp:Parameter Name="is_answered" Type="Boolean" />
                         </InsertParameters>
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="DropDownList1" Name="incident_id" PropertyName="SelectedValue" Type="Int32" />
+                        </SelectParameters>
                         <UpdateParameters>
-                            <asp:SessionParameter Name="customer_id" Type="Int32" SessionField="customerId" />
-                            <asp:SessionParameter Name="user_id" Type="Int32" SessionField="userId" />
+                            <asp:Parameter Name="customer_id" Type="Int32" />
                             <asp:Parameter Name="datetime" Type="DateTime" />
                             <asp:Parameter Name="status" Type="String" />
                             <asp:Parameter Name="description" Type="String" />
                             <asp:Parameter Name="method_of_contact" Type="String" />
                             <asp:Parameter Name="product_name" Type="String" />
-                            <asp:ControlParameter Name="incident_id" Type="Int32" ControlID="DropDownList1" />
+                            <asp:ControlParameter Name="incident_number" Type="Int32" ControlID="DropDownList1" />
+                            <asp:Parameter Name="is_answered" Type="Boolean" DefaultValue="True" />
+                            <asp:Parameter Name="incident_id" Type="Int32" />
                         </UpdateParameters>
                     </asp:SqlDataSource>
                 </td>

@@ -17,8 +17,8 @@ namespace TechKnowPro
         protected void Page_Load(object sender, EventArgs e)
         {
             UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;           
-            Session["userId"] = "3";
-            Session["customerId"] = "3";
+            Session["userId"] = "5";
+            Session["customerId"] = "5";
             txtCustId.Text = Session["customerId"].ToString();
             
         }
