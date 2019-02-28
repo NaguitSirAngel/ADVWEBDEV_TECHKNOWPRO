@@ -10,7 +10,7 @@
             width: 100%;
         }
         .auto-style2 {
-            width: 709px;
+            width: 1118px;
         }
         .auto-style3 {
             width: 194px;
@@ -31,7 +31,7 @@
         <table class="auto-style1">
             <tr>
                 <td class="auto-style2">
-                   <h3> <asp:Label ID="Label1" runat="server" Text="TechKnow Pro - Incident Report Management Software"></asp:Label></h3>
+                   <h2> <asp:Label ID="Label1" runat="server" Text="TechKnow Pro - Incident Report Management Software"></asp:Label></h2>
                 </td>
                 <td>
                     <asp:Button ID="btnLogout" runat="server" Text="Logout" Width="83px" CausesValidation="False" OnClick="btnLogout_Click" />
@@ -140,36 +140,6 @@
                 <td class="auto-style3"> <asp:Label ID="Label15" runat="server" Text="Phone:"></asp:Label></td>
                 <td>
                     <asp:TextBox ID="txtPhone" runat="server" Width="219px"></asp:TextBox>
-                    <asp:SqlDataSource ID="sdsCustomer" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" UpdateCommand="UPDATE [customers] SET [user_id] = @user_id, [firstname] = @firstname, [lastname] = @lastname, [address] = @address, [position_title] = @position_title, [email] = @email, [phone] = @phone, [question_id] = @question_id, [question_answer] = @question_answer WHERE [customer_id] = @customer_id">
-                      
-                        <UpdateParameters>
-                            <asp:SessionParameter Name="user_id" SessionField="UsId" Type="Int32" />
-                            <asp:ControlParameter ControlID="txtFirstN" Name="firstname" PropertyName="Text" Type="String" />
-                            <asp:ControlParameter ControlID="txtLastN" Name="lastname" PropertyName="Text" Type="String" />
-                            <asp:ControlParameter ControlID="txtAddress" Name="address" PropertyName="Text" Type="String" />
-                            <asp:ControlParameter ControlID="txtPos" Name="position_title" PropertyName="Text" Type="String" />
-                            <asp:ControlParameter ControlID="txtEmail" Name="email" PropertyName="Text" Type="String" />
-                            <asp:ControlParameter Name="phone" Type="String" ControlID="txtPhone" PropertyName="Text" />
-                            <asp:SessionParameter Name="question_id" SessionField="QId" Type="Int32" />
-                            <asp:ControlParameter ControlID="txtAnswer" Name="question_answer" PropertyName="Text" Type="String" />
-                            <asp:SessionParameter Name="customer_id" SessionField="CId" Type="Int32" />
-                        </UpdateParameters>
-                    </asp:SqlDataSource>
-                    <asp:SqlDataSource ID="sdsUser" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"  UpdateCommand="UPDATE [users] SET [username] = @username, [password] = @password WHERE [user_id] = @user_id">
-                        
-                        
-                        <UpdateParameters>
-                            <asp:ControlParameter ControlID="txtUser" Name="username" PropertyName="Text" Type="String" />
-                            <asp:ControlParameter ControlID="txtPass" Name="password" PropertyName="Text" Type="String" />
-                            <asp:SessionParameter Name="user_id" SessionField="UsId" Type="Int32" />
-                        </UpdateParameters>
-                    </asp:SqlDataSource>
-                    <asp:SqlDataSource ID="sdsQuestion" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [questions] WHERE ([description] IS NOT NULL) ORDER BY [question_id]"></asp:SqlDataSource>
-                    <asp:SqlDataSource ID="sdsRetPassw" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [users] WHERE ([user_id] = @user_id)">
-                        <SelectParameters>
-                            <asp:SessionParameter Name="user_id" SessionField="UsId" Type="Int32" />
-                        </SelectParameters>
-                    </asp:SqlDataSource>
                 </td>
             </tr>
             <tr>
@@ -182,5 +152,33 @@
             </tr>
         </table>
     </form>
+        <asp:SqlDataSource ID="sdsCustomer" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" UpdateCommand="UPDATE [customers] SET [firstname] = @firstname, [lastname] = @lastname, [address] = @address, [position_title] = @position_title, [email] = @email, [phone] = @phone, [question_id] = @question_id, [question_answer] = @question_answer WHERE [user_id] = @user_id">                  
+            <UpdateParameters>
+                <asp:ControlParameter ControlID="txtFirstN" Name="firstname" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtLastN" Name="lastname" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtAddress" Name="address" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtPos" Name="position_title" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtEmail" Name="email" PropertyName="Text" Type="String" />
+                <asp:ControlParameter Name="phone" Type="String" ControlID="txtPhone" PropertyName="Text" />
+                <asp:SessionParameter Name="question_id" SessionField="QId" Type="Int32" />
+                <asp:ControlParameter ControlID="txtAnswer" Name="question_answer" PropertyName="Text" Type="String" />
+                <asp:SessionParameter Name="user_id" SessionField="UsId" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="sdsUser" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>"  UpdateCommand="UPDATE [users] SET [username] = @username, [password] = @password WHERE [user_id] = @user_id">       
+            <UpdateParameters>
+                <asp:ControlParameter ControlID="txtUser" Name="username" PropertyName="Text" Type="String" />
+                <asp:ControlParameter ControlID="txtPass" Name="password" PropertyName="Text" Type="String" />
+                <asp:SessionParameter Name="user_id" SessionField="UsId" Type="Int32" />
+            </UpdateParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="sdsQuestion" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [questions] WHERE ([description] IS NOT NULL) ORDER BY [question_id]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="sdsRetPassw" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [users] WHERE ([user_id] = @user_id)">
+            <SelectParameters>
+                <asp:SessionParameter Name="user_id" SessionField="UsId" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+        <asp:SqlDataSource ID="sdsCustomerInformation" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [customer_id], [user_id], CONCAT([firstname],' ',[lastname]) AS fullname, [firstname], [lastname], [address], [email], [phone], [position_title], [question_id], [question_answer] FROM [customers] ORDER BY [customer_id]">
+        </asp:SqlDataSource>
 </body>
 </html>

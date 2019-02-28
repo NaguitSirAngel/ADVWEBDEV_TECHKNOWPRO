@@ -41,7 +41,7 @@
                 <td class="auto-style2">&nbsp;</td>
                 <td>
                     <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
-                    <asp:Button ID="btnRegister" runat="server" Text="Register" CausesValidation="False" />
+                    <asp:Button ID="btnRegister" runat="server" Text="Register" CausesValidation="False" OnClick="btnRegister_Click" />
                 </td>
             </tr>
         </table>

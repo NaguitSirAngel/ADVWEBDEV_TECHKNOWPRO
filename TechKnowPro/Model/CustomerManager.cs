@@ -21,7 +21,7 @@ namespace TechKnowPro.Model
 
         public void update(Customer a)
         {  
-           int index = customerList.FindIndex(x => x.fN == a.fN);
+           int index = customerList.FindIndex(x => x.firstname == a.lastname);
             customerList.RemoveAt(index);
             customerList.Insert(index, a);
            
