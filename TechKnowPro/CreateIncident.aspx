@@ -5,9 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="Scripts/jquery-3.0.0.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
     <style type="text/css">
         .auto-style1 {
             width: 100%;
@@ -86,7 +83,7 @@
                                     <asp:Label ID="Label4" runat="server" Text="Incident #: "></asp:Label>
                                 </td>
                                 <td class="auto-style4">
-                                    <asp:TextBox ID="txtIncidentNum" runat="server" Width="230px" ReadOnly="True"></asp:TextBox>
+                                    <asp:TextBox ID="txtIncidentNum" runat="server" Width="230px" ReadOnly="True" AutoPostBack="True"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -136,21 +133,25 @@
                                         (@incident_number, @customer_id, @datetime, @status, @description, @method_of_contact, @product_name)">
                 <InsertParameters>
                     <asp:FormParameter Name="incident_number" FormField="txtIncidentNum" Type="Int32"/>
-                    <asp:FormParameter Name="customer_id" formfield="txtCustomerId" Type="Int32"/>
-                    <asp:FormParameter Name="user_id" Type="Int32" />
+                    <asp:FormParameter Name="customer_id" FormField="txtCustomerId" Type="Int32"/>
                     <asp:FormParameter Name="datetime" Type="DateTime" />
                     <asp:FormParameter Name="status" FormField="ddlStatus" Type="String"/>
                     <asp:FormParameter Name="description" FormField="txtDescription" Type="String"/>
                     <asp:FormParameter Name="method_of_contact" FormField="rblContactMethod" Type="String"/>
                     <asp:FormParameter Name="product_name" FormField="txtProductName" Type="String"/>
                 </InsertParameters>
-                
-
-
             </asp:SqlDataSource>
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+            <asp:SqlDataSource 
+                ID="SqlDataSource2" 
+                runat="server" 
                 ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
                 SelectCommand="select [incident_id] from incidents order by [incident_id] desc;"></asp:SqlDataSource>
+            <asp:SqlDataSource 
+                ID="SqlDataSource3" 
+                runat="server" 
+                ConnectionString="<%$ ConnectionStrings:ConnectionString %>" 
+                SelectCommand="SELECT (COUNT(*)+1) as count FROM [incidents]">
+            </asp:SqlDataSource>
         </div>
     </form>
 </body>
