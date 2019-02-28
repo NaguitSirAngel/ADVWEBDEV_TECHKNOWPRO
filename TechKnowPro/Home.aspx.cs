@@ -35,7 +35,7 @@ namespace TechKnowPro
             //load details for customer
             if (user.role == "customer")
             {
-                lblGetStarted.Text = "Go to <a href =\"\">Profile</a> to update your profile and/or customer information";
+                lblGetStarted.Text = "Go to <a href =\"ProfileForm.aspx\">Profile</a> to update your profile and/or customer information";
                 lblContent1.Text = "What do you think about our service?";
                 lblContent2.Text = "<a href =\"\">Submit a survey</a> to provide your feedback for any support we have provided to you recently";
             }

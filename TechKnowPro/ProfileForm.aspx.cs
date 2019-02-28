@@ -10,62 +10,95 @@ namespace TechKnowPro
 {
     public partial class ProfileForm : System.Web.UI.Page
     {
+        Customer selectedCustomer;
+        User user;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+
+            //no login info
+            if (Session["user"] == null) { Response.Redirect("~/Login.aspx"); }
+            //get user information, redirect if wrong access level
+            user = (User)Session["user"];
+            if (user.role != "customer") { Response.Redirect("~/Home.aspx"); }
+
             if (!IsPostBack)
             {
                 ddlQuest.DataBind();
-                Customer sample = (Customer)Session["User"];
-                Session["UsId"] = sample.user_id;
-                Session["CId"] = sample.cust_id;
-               
-                txtFirstN.Text = sample.fN;
-                txtLastN.Text = sample.lN;
-                txtPhone.Text = sample.phone;
-                txtAddress.Text = sample.address;
-                txtAnswer.Text = sample.ques_answer;
-                txtUser.Text = txtEmail.Text = sample.email;
-                txtPos.Text = sample.pos_title;
+                //get customer info
+                selectedCustomer = this.GetSelectedCustomer();
+
+                txtFirstN.Text = selectedCustomer.firstname;
+                txtLastN.Text = selectedCustomer.lastname;
+                txtPhone.Text = selectedCustomer.phone;
+                txtAddress.Text = selectedCustomer.address;
+                txtAnswer.Text = selectedCustomer.questionAnswer;
+                txtUser.Text = txtEmail.Text = selectedCustomer.email;
+                txtPos.Text = selectedCustomer.positionTitle;
+
                 sdsRetPassw.DataBind();
+                //set session id to get password
+                Session["UsId"] = selectedCustomer.user_id;
                 DataView dV = (DataView)sdsRetPassw.Select(DataSourceSelectArguments.Empty);
                 DataRowView rV = dV[0]; //retrieve password inside db 
                 txtPass.Text = rV["password"].ToString();
+
             }
-            
+
+
+        }
+
+        private Customer GetSelectedCustomer()
+        {
+            //get table and filter to get customer
+            DataView customersTable = (DataView)sdsCustomerInformation.Select(DataSourceSelectArguments.Empty);
+
+            customersTable.RowFilter =
+                "user_id='" + user.userId + "'";
+            DataRowView row = customersTable[0];
+
+            //create customer object and add details to object
+            Customer c = new Customer();
+            c.customer_id = row["customer_id"].ToString();
+            c.user_id = row["user_id"].ToString();
+            c.firstname = row["firstname"].ToString();
+            c.lastname = row["lastname"].ToString();
+            c.fullname = row["fullname"].ToString();
+            c.address = row["address"].ToString();
+            c.phone = row["phone"].ToString();
+            c.email = row["email"].ToString();
+            c.positionTitle = row["position_title"].ToString();
+            c.questionAnswer = row["question_answer"].ToString();
+            return c;
 
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            //updates the username and password first
             sdsUser.Update();
+
+            //updates customer information
             Session["QId"] = ddlQuest.SelectedIndex + 1; //should be the number of the value selected
             sdsCustomer.Update();
 
-            Customer sample = (Customer)Session["User"];
+            selectedCustomer = this.GetSelectedCustomer();
+            selectedCustomer.questionId = (ddlQuest.SelectedIndex + 1).ToString();
 
-            sample.quest_id = ddlQuest.SelectedIndex +1;
 
-            sample.fN= txtFirstN.Text;
-            sample.lN= txtLastN.Text;
-            sample.phone= txtPhone.Text;
-            sample.address= txtAddress.Text;
-            sample.ques_answer = txtAnswer.Text;
-            sample.email=  txtUser.Text;
-            sample.pos_title =  txtPos.Text;
-            Session["User"] = sample;
-            CustomerManager sampleMan = (CustomerManager)Session["custoList"];
-            sampleMan.update(sample);
-            Session["custoList"] = sampleMan;
+            //Session["Customer"] = selectedCustomer;
+            //CustomerManager sampleMan = (CustomerManager)Session["custoList"];
+            //sampleMan.update(selectedCustomer);
+            //Session["custoList"] = sampleMan;
             lblSucc.Text = "You updated your profile";
-
 
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Session.Abandon();
-            Response.Redirect("LoginForm.aspx");
+            Session.Clear();
+            Response.Redirect("Login.aspx");
         }
     }
 }

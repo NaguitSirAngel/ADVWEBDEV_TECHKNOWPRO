@@ -29,8 +29,9 @@ namespace TechKnowPro
                 //after question is available take the id to send to customer table
                 sdsCustomers.Insert(); // insert with value question id =9
                 
-                lblSuccOrErr.Text = "An email has been sent please check your email";
+                lblSuccOrErr.Text = "Registration successful! An email has been sent please check your email";
                 Session.Abandon();
+                Response.Redirect("~/Login.aspx");
             }
             else { lblSuccOrErr.Text = "User exists already/Agreement not checked"; }
         }

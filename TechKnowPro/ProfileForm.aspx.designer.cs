@@ -328,6 +328,24 @@ namespace TechKnowPro {
         protected global::System.Web.UI.WebControls.TextBox txtPhone;
         
         /// <summary>
+        /// btnLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogin;
+        
+        /// <summary>
+        /// lblSucc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSucc;
+        
+        /// <summary>
         /// sdsCustomer control.
         /// </summary>
         /// <remarks>
@@ -364,21 +382,12 @@ namespace TechKnowPro {
         protected global::System.Web.UI.WebControls.SqlDataSource sdsRetPassw;
         
         /// <summary>
-        /// btnLogin control.
+        /// sdsCustomerInformation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogin;
-        
-        /// <summary>
-        /// lblSucc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSucc;
+        protected global::System.Web.UI.WebControls.SqlDataSource sdsCustomerInformation;
     }
 }

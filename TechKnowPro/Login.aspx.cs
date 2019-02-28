@@ -35,21 +35,24 @@ namespace TechKnowPro
                 {
                     //if password correct, store information in a User class
                     User user = new User();
-                    user.userId = Convert.ToInt32(loginTable[i]["user_id"]);
+                    user.userId = loginTable[i]["user_id"].ToString();
                     user.username = loginTable[i]["username"].ToString();
                     user.role = loginTable[i]["definition"].ToString();
                     Session["user"] = user;
 
                     Response.Redirect("~/Home.aspx");
-                    //if (user.role == "admin") { Response.Redirect("~/HomeAdmin.aspx"); }
-                    //if (user.role == "technician") { Response.Redirect("~/HomeTech.aspx"); }
-                    //if (user.role == "customer") { Response.Redirect("~/HomeCustomer.aspx"); }
+
                 }
                 else
                 {
                     lblResult.Text = "You have entered an incorrect password!";
                 }
             }
+        }
+
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Registration.aspx");
         }
     }
 }
